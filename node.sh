@@ -1,73 +1,35 @@
 #!/bin/bash
 
-# 定义 RPC 地址数组
-RPC_ENDPOINTS=(
-    "https://nillion-testnet-rpc.polkachu.com"
-    "https://nillion-testnet.rpc.kjnodes.com"
-    "https://testnet-nillion-rpc.lavenderfive.com"
-)
+# 创建screen会话nexus
+screen -dmS nexus
 
-# 定义 Docker 容器名称
-CONTAINER_NAME="nillion5"
+# 进入screen会话
+screen -S nexus -X stuff $'echo "Starting dependencies installation..."\n'
 
-# 定义启动容器的命令
-run_container() {
-    RANDOM_RPC=${RPC_ENDPOINTS[$RANDOM % ${#RPC_ENDPOINTS[@]}]}
-    echo "$(date) - 使用 RPC: $RANDOM_RPC 重启容器"
+# 更新系统并安装依赖
+screen -S nexus -X stuff $'sudo apt update -y\n'
+screen -S nexus -X stuff $'sudo apt upgrade -y\n'
+screen -S nexus -X stuff $'sudo apt install -y build-essential\n'
+screen -S nexus -X stuff $'sudo apt install -y pkg-config\n'
+screen -S nexus -X stuff $'sudo apt install -y libssl-dev\n'
+screen -S nexus -X stuff $'sudo apt install -y protobuf-compiler\n'
 
-    sudo docker run -d \
-        --name $CONTAINER_NAME \
-        -v $HOME/nillion/verifier:/var/tmp \
-        --log-opt max-size=1000m \
-        --log-opt max-file=3 \
-        nillion/verifier:v1.0.1 \
-        verify --rpc-endpoint "$RANDOM_RPC"
-}
+# 设置环境变量
+screen -S nexus -X stuff $'export OPENSSL_DIR=/usr/lib/ssl\n'
+screen -S nexus -X stuff $'export PKG_CONFIG_PATH=/usr/lib/pkgconfig\n'
+screen -S nexus -X stuff $'export OPENSSL_DIR=/usr\n'
+screen -S nexus -X stuff $'export OPENSSL_INCLUDE_DIR=/usr/include\n'
+screen -S nexus -X stuff $'export OPENSSL_LIB_DIR=/usr/lib\n'
 
-# 删除并重启容器
-restart_container() {
-    echo "$(date) - 删除并重启容器: $CONTAINER_NAME"
-    sudo docker stop $CONTAINER_NAME
-    sudo docker rm $CONTAINER_NAME
-    run_container
-}
+# 执行curl命令，安装Nexus CLI
+screen -S nexus -X stuff $'curl https://cli.nexus.xyz/ | sh\n'
 
-# 检查容器状态
-check_container_status() {
-    STATUS=$(sudo docker inspect -f '{{.State.Status}}' $CONTAINER_NAME 2>/dev/null)
+# 等待命令执行完成，假设该命令是非阻塞的
+sleep 5
 
-    if [ "$STATUS" != "running" ]; then
-        echo "$(date) - 容器状态异常，重启容器"
-        restart_container
-    else
-        echo "$(date) - 容器状态正常"
-    fi
-}
+# 启动Nexus并传递Prover ID
+PROVER_ID=$(cat /home/ubuntu/Prover-ID)
+screen -S nexus -X stuff $'echo "Starting Nexus with Prover ID..."\n'
+screen -S nexus -X stuff $"nexus start --prover-id $PROVER_ID\n"
 
-# 检查容器最新日志
-check_container_logs() {
-    LAST_LOGS=$(sudo docker logs --tail 20 $CONTAINER_NAME 2>&1)
-
-    ERROR_INTERNAL_CODE=$(echo "$LAST_LOGS" | grep "(code: -32603)")
-    if [ ! -z "$ERROR_INTERNAL_CODE" ]; then
-        echo "$(date) - 检测到错误 (code: -32603)，重启容器"
-        restart_container
-        return
-    fi
-
-    TIMEOUT_ERRORS=$(echo "$LAST_LOGS" | grep -A 1 "operation timed out")
-    if [[ $(echo "$TIMEOUT_ERRORS" | grep -c "operation timed out") -ge 2 ]]; then
-        echo "$(date) - 检测到连续的超时错误，重启容器"
-        restart_container
-        return
-    fi
-
-    echo "$(date) - RPC链接正常"
-}
-
-# 主循环，每 5 分钟检查一次
-while true; do
-    check_container_status
-    check_container_logs
-    sleep 300
-done
+echo "脚本已完成。请检查screen会话 'nexus' 中的日志。"
