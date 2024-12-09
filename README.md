@@ -53,7 +53,7 @@ curl https://cli.nexus.xyz/ | sh
   - 接着输入您专属的 Prover ID，然后回车以继续后续流程。
 4. **退出会话**：
 通过按下 `Ctrl+A+D` 组合键，可安全地退出当前 `screen` 会话，此时验证器仍在后台运行。
-如果要删除会话，使用`screen -S nexus_node -X quit`即可，如果有重名的会话，使用`screen -ls`查看会话的ID，使用`screen -S <id> -X quit`来删除会话。（把<id>替换为实际的查询到的id，不要带<>括号）
+如果要删除会话，使用`screen -S nexus_node -X quit`即可，如果有重名的会话，使用`screen -ls`查看会话的ID，使用`screen -S <id> -X quit`来删除会话。（把id替换为实际的查询到的id，不要带<>括号）
 5. **重新连接会话**：
 若需要重新进入验证器所在的 `screen` 会话，执行以下命令：
 ```bash
