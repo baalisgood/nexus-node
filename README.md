@@ -1,5 +1,24 @@
 # Nexus 验证器环境部署脚本
 
+## 快速开始
+
+在 Ubuntu 22.04 系统上执行以下命令：
+
+```bash
+# 1. 安装 git
+sudo apt update
+sudo apt install -y git
+
+# 2. 克隆项目
+git clone https://github.com/wt195799611/nexus-node.git
+
+# 3. 进入项目目录
+cd nexus-node
+
+# 4. 运行脚本
+bash node.sh
+```
+
 ## 功能说明
 本脚本旨在 Ubuntu 22.04 系统上自动完成 Nexus 验证器所需环境依赖的安装工作。
 
