@@ -29,7 +29,8 @@ case $choice in
 set -x
 
 echo "正在安装系统依赖..."
-sudo apt update && sudo apt upgrade -y
+# sudo apt update && sudo apt upgrade -y
+sudo apt update
 sudo apt install -y build-essential pkg-config libssl-dev git-all
 echo "y" | sudo apt install protobuf-compiler
 
