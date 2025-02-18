@@ -106,7 +106,7 @@ start_cli() {
         return
     fi
 
-    if check_cli_status; then
+    if screen -list | grep -q "nexus_cli"; then
         echo -e "${RED}Nexus-CLI 已在运行中，请勿重复启动${RESET}"
         return
     fi
@@ -129,9 +129,6 @@ start_cli() {
             sleep 2
             echo "'$prover_id'"
         } | curl https://cli.nexus.xyz/ | sh
-        
-        # 标记 CLI 已运行
-        touch ~/.nexus_status/cli_running
     '
     
     echo -e "${GREEN}Nexus-CLI 已在后台启动，使用选项4查看运行状态${RESET}"
