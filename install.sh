@@ -134,14 +134,9 @@ start_cli() {
     echo -e "${GREEN}Nexus-CLI 已在后台启动，使用选项4查看运行状态${RESET}"
 }
 
-# 克隆仓库
-echo -e "${GREEN}正在克隆项目...${RESET}"
-git clone https://github.com/baalisgood/nexus-node.git
-cd nexus-node
-
 # 主循环
+show_menu
 while true; do
-    show_menu
     read -p "请输入选项 [1-4 或 q]: " choice
     case $choice in
         1)
@@ -165,4 +160,5 @@ while true; do
             ;;
     esac
     echo
+    show_menu
 done 
