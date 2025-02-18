@@ -66,11 +66,9 @@ install_deps() {
     '
     
     echo -e "${GREEN}依赖安装已在后台启动${RESET}"
-    echo -e "${GREEN}正在连接到依赖安装会话...${RESET}"
-    echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
-    sleep 2
-    # 使用 setsid 创建新的会话
-    exec setsid screen -r nexus_deps
+    echo -e "${GREEN}请打开新的终端窗口，执行以下命令查看安装进度：${RESET}"
+    echo -e "screen -r nexus_deps"
+    echo -e "${GREEN}使用 Ctrl+A+D 组合键可以退出会话${RESET}"
 }
 
 # 查看依赖安装进度
@@ -85,11 +83,9 @@ check_deps_progress() {
         return
     fi
 
-    echo -e "${GREEN}正在连接到依赖安装会话...${RESET}"
-    echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
-    sleep 2
-    # 使用 setsid 创建新的会话
-    exec setsid screen -r nexus_deps
+    echo -e "${GREEN}请打开新的终端窗口，执行以下命令查看安装进度：${RESET}"
+    echo -e "screen -r nexus_deps"
+    echo -e "${GREEN}使用 Ctrl+A+D 组合键可以退出会话${RESET}"
 }
 
 # 启动 Nexus-CLI
@@ -134,11 +130,9 @@ check_cli_status() {
         return
     fi
 
-    echo -e "${GREEN}正在连接到 Nexus-CLI 会话...${RESET}"
-    echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
-    sleep 2
-    # 使用 setsid 创建新的会话
-    exec setsid screen -r nexus_cli
+    echo -e "${GREEN}请打开新的终端窗口，执行以下命令查看运行状态：${RESET}"
+    echo -e "screen -r nexus_cli"
+    echo -e "${GREEN}使用 Ctrl+A+D 组合键可以退出会话${RESET}"
 }
 
 # 主循环
