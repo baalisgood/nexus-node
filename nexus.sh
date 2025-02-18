@@ -45,7 +45,10 @@ install_deps() {
     fi
 
     echo -e "${GREEN}开始安装依赖环境...${RESET}"
-    
+
+    # 删除所有名为 nexus_deps 的会话
+    screen -ls | grep "nexus_deps" | awk '{print $1}' | xargs -r screen -S {} -X quit
+
     # 创建新的 screen 会话
     screen -dmS nexus_deps bash -c '
         # 启用错误追踪
