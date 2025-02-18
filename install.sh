@@ -99,7 +99,7 @@ start_cli() {
     if ! check_deps_status; then
         echo -e "${RED}请先完成依赖环境的安装（选项1）${RESET}"
         return
-    }
+    fi
 
     if check_cli_status; then
         echo -e "${RED}Nexus-CLI 已在运行中，请勿重复启动${RESET}"
