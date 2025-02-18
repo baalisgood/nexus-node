@@ -39,10 +39,15 @@ check_deps_status() {
 
 # 检查 CLI 运行状态
 check_cli_status() {
-    if [ -f ~/.nexus_status/cli_running ]; then
-        return 0
+    if ! screen -list | grep -q "nexus_cli"; then
+        echo -e "${RED}Nexus-CLI 未运行，请先执行选项3${RESET}"
+        return
     fi
-    return 1
+
+    echo -e "${GREEN}正在连接到 Nexus-CLI 会话...${RESET}"
+    echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
+    sleep 2
+    screen -r nexus_cli
 }
 
 # 安装依赖环境
@@ -130,19 +135,6 @@ start_cli() {
     '
     
     echo -e "${GREEN}Nexus-CLI 已在后台启动，使用选项4查看运行状态${RESET}"
-}
-
-# 查看 CLI 运行状态
-check_cli_status() {
-    if ! screen -list | grep -q "nexus_cli"; then
-        echo -e "${RED}Nexus-CLI 未运行，请先执行选项3${RESET}"
-        return
-    }
-
-    echo -e "${GREEN}正在连接到 Nexus-CLI 会话...${RESET}"
-    echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
-    sleep 2
-    screen -r nexus_cli
 }
 
 # 克隆仓库
