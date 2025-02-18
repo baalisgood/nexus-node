@@ -1,5 +1,6 @@
 # Nexus 验证器环境部署脚本
 
+<<<<<<< HEAD
 ## 快速安装（推荐）
 在 Ubuntu 系统上执行以下命令即可一键安装：
 
@@ -7,6 +8,8 @@
 curl -fsSL https://raw.githubusercontent.com/wt195799611/nexus-node/main/install.sh | bash
 ```
 
+=======
+>>>>>>> b1ddcbc0f5b285d5686738c5c5dda7dc71b47528
 ## 快速开始
 
 在 Ubuntu 24.04 系统上执行以下命令：
