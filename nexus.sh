@@ -87,7 +87,7 @@ check_deps_progress() {
     echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
     sleep 2
     # 使用 script 创建伪终端并连接到 screen 会话
-    script -q -c "screen -r nexus_deps" /dev/null
+    script -q -f -c "screen -r nexus_deps" /dev/null
 }
 
 # 启动 Nexus-CLI
@@ -136,7 +136,7 @@ check_cli_status() {
     echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
     sleep 2
     # 使用 script 创建伪终端并连接到 screen 会话
-    script -q -c "screen -r nexus_cli" /dev/null
+    script -q -f -c "screen -r nexus_cli" /dev/null
 }
 
 # 主循环
