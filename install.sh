@@ -86,7 +86,7 @@ check_deps_progress() {
     if ! screen -list | grep -q "nexus_deps"; then
         echo -e "${RED}依赖安装会话未运行，请先执行选项1${RESET}"
         return
-    }
+    fi
 
     echo -e "${GREEN}正在连接到依赖安装会话...${RESET}"
     echo -e "${GREEN}提示：使用 Ctrl+A+D 组合键可以退出会话${RESET}"
