@@ -104,14 +104,14 @@ start_cli() {
     if check_cli_status; then
         echo -e "${RED}Nexus-CLI 已在运行中，请勿重复启动${RESET}"
         return
-    }
+    fi
 
     # 获取用户输入的 Prover ID
     read -p "请输入您的 Prover ID: " prover_id
     if [ -z "$prover_id" ]; then
         echo -e "${RED}Prover ID 不能为空${RESET}"
         return
-    }
+    fi
 
     echo -e "${GREEN}正在启动 Nexus-CLI...${RESET}"
     
