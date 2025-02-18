@@ -43,6 +43,7 @@ bash node.sh
 screen -S nexus_node
 ```
 此命令创建一个名为 `nexus_node` 的 `screen` 会话，`screen` 可使进程在后台持续运行，即便终端连接断开也不受影响。
+
 2. **在会话中执行命令**：
 ```bash
 curl https://cli.nexus.xyz/ | sh
