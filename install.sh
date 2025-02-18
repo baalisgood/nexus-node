@@ -22,5 +22,11 @@ echo -e "${GREEN}正在克隆项目...${RESET}"
 git clone https://github.com/wt195799611/nexus-node.git
 cd nexus-node
 
-# 运行主脚本
-bash node.sh 
+# 运行主脚本并自动选择选项1
+echo -e "${GREEN}开始安装依赖环境...${RESET}"
+echo "1" | bash node.sh
+
+echo -e "${GREEN}安装完成！${RESET}"
+echo -e "${GREEN}您可以通过以下命令查看安装进度：${RESET}"
+echo -e "cd nexus-node && bash node.sh"
+echo -e "然后选择选项 2" 
