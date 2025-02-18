@@ -112,7 +112,7 @@ start_cli() {
     fi
 
     # 获取用户输入的 Prover ID
-    read -p "请输入您的 Prover ID: " prover_id
+    read -p "请输入您的 Prover ID: " prover_id < /dev/tty
     if [ -z "$prover_id" ]; then
         echo -e "${RED}Prover ID 不能为空${RESET}"
         return
@@ -137,7 +137,7 @@ start_cli() {
 # 主循环
 show_menu
 while true; do
-    read -p "请输入选项 [1-4 或 q]: " choice
+    read -p "请输入选项 [1-4 或 q]: " choice < /dev/tty
     case $choice in
         1)
             install_deps
