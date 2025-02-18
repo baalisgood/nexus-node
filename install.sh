@@ -145,6 +145,11 @@ check_cli_status() {
     screen -r nexus_cli
 }
 
+# 克隆仓库
+echo -e "${GREEN}正在克隆项目...${RESET}"
+git clone https://github.com/baalisgood/nexus-node.git
+cd nexus-node
+
 # 主循环
 while true; do
     show_menu

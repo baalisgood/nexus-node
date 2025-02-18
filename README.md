@@ -4,7 +4,7 @@
 在 Ubuntu 系统上执行以下命令即可一键安装：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/wt195799611/nexus-node/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/baalisgood/nexus-node/main/install.sh | bash
 ```
 
 ## 快速开始
@@ -17,7 +17,7 @@ sudo apt update
 sudo apt install -y git
 
 # 2. 克隆项目
-git clone https://github.com/wt195799611/nexus-node.git
+git clone https://github.com/baalisgood/nexus-node.git
 
 # 3. 进入项目目录
 cd nexus-node
